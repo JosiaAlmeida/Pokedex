@@ -67,7 +67,7 @@ export default {
         mudarsprite: function(){
             if(this.isfront){
                 this.correntimg=this.pokemom.back
-                this.isfront=false
+                this.isfront= false
             }else{   
                 this.correntimg=this.pokemom.front
                 this.isfront=true 
