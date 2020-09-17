@@ -1,12 +1,51 @@
 <template>
-    <div>
-        <h1>{{numero}} {{name | upper}}</h1>
-        <p>{{url}} </p>
+    <div id="pok">
+        <div class="card">
+            <div class="card-image">
+                <figure>
+                <img :src="pokemom.front">
+                </figure>
+            </div>
+            <div class="card-content">
+                <div class="media">
+                <div class="media-left">
+                   
+                </div>
+                <div class="media-content">
+                    <p class="title is-4">{{numero}} {{name | upper}}</p>
+                    <p class="subtitle is-6">{{pokemom.type}}</p>
+                </div>
+                </div>
+
+                <div class="content">
+                </div>
+            </div>
+            </div><!--------Fim fo card--------------->
+
     </div>
 </template>
 
 <script>
+import axios from 'axios';
 export default {
+    created: function(){
+        //chamandi url
+        axios.get(this.url).then(res=>{
+            this.pokemom.type= res.data.types[0].type.name;
+            this.pokemom.front= res.data.sprites.front_default;
+            this.pokemom.back= res.data.sprites.back_default;
+            console.log(this.pokemom)
+        })
+    },
+    data(){
+        return{
+            pokemom:
+                {type:"",
+                    front:"",
+                    back:""
+                }
+        }
+    },
     props:{
         numero:Number,
         name:String,
@@ -24,5 +63,7 @@ export default {
 </script>
 
 <style>
-
+    #pok{
+        margin: 2%;
+    }
 </style>
