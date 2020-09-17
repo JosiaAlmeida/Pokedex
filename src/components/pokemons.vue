@@ -3,8 +3,9 @@
         <div class="card">
             <div class="card-image">
                 <figure>
-                <img :src="pokemom.front">
+                <img :src="correntimg">               
                 </figure>
+                <button class="button is-medium is-fullwidth" @click="mudarsprite">Alterar posição</button>
             </div>
             <div class="card-content">
                 <div class="media">
@@ -34,11 +35,14 @@ export default {
             this.pokemom.type= res.data.types[0].type.name;
             this.pokemom.front= res.data.sprites.front_default;
             this.pokemom.back= res.data.sprites.back_default;
+            this.correntimg=this.pokemom.front;
             console.log(this.pokemom)
         })
     },
     data(){
         return{
+            isfront: true,
+            correntimg:"",
             pokemom:
                 {type:"",
                     front:"",
@@ -58,6 +62,17 @@ export default {
             var newName= value[0].toUpperCase() + value.slice(1)
             return newName
         }
+    },
+    methods:{
+        mudarsprite: function(){
+            if(this.isfront){
+                this.correntimg=this.pokemom.back
+                this.isfront=false
+            }else{   
+                this.correntimg=this.pokemom.front
+                this.isfront=true 
+            }
+        } 
     }
 }
 </script>
